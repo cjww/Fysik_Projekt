@@ -11,7 +11,7 @@ int main(){
 		while (window.pollEvent(e)) {
 			switch (e.type) {
 			case sf::Event::Closed:
-				exit(0);
+				window.close();
 				break;
 
 			}
@@ -19,6 +19,14 @@ int main(){
 
 		window.clear();
 
+		sf::Font font;
+		font.loadFromFile("../Minecraft.ttf");
+		sf::Text text;
+		text.setString("Hello World\nHello Again");
+		text.setFont(font);
+		
+	
+		window.draw(text);
 
 		window.display();
 	}
