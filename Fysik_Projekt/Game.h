@@ -2,17 +2,16 @@
 #include <SFML\Graphics.hpp>
 #include <iostream>
 #include <vector>
-#include "GameObjectHandler.h"
+#include "Table.h"
 
 class Game
 {
 private:
+	sf::Clock time;
+
 	sf::RenderWindow * window;
 
-	GameObjectHandler objHandler;
-
-	sf::Texture tableTex;
-	sf::Sprite tableSprite;
+	Table table;
 
 public:
 	Game();
