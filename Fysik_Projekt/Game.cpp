@@ -18,6 +18,7 @@ Game::Game()
 		}
 
 		//Update
+		table.update(time.restart().asSeconds());
 
 		window->clear();
 

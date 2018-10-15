@@ -1,6 +1,4 @@
-﻿  Game.cpp
-  Generating Code...
-  Compiling...
-  main.cpp
-  Generating Code...
+﻿  Table.cpp
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Fysik_Projekt.vcxproj -> C:\Users\Julius\source\repos\Fysik_Projekt\Debug\Fysik_Projekt.exe
