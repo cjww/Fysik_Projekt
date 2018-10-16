@@ -29,5 +29,7 @@ public:
 
 	float distance(sf::Vector2f a, sf::Vector2f b) const;
 
+	void shootBall(sf::RenderWindow& window);
+
 };
 

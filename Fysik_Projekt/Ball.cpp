@@ -12,6 +12,7 @@ Ball::Ball(sf::Vector2f pos, bool whiteBall)
 	ball.setOrigin(ball.getRadius(), ball.getRadius());
 	ball.setPosition(pos);
 
+	mousePressed = false;
 }
 
 

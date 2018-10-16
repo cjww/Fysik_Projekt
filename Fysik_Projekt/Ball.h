@@ -1,12 +1,15 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 
+#include <iostream>
 class Ball : public sf::Drawable
 {
 private:
 	sf::CircleShape ball;
 
 	sf::Vector2f vel;
+
+	bool mousePressed;
 
 public:
 	Ball(sf::Vector2f pos, bool whiteBall = false);

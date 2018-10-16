@@ -13,11 +13,18 @@ Game::Game()
 			case sf::Event::Closed:
 				window->close();
 				break;
+			case sf::Event::MouseButtonPressed:
+				if (e.mouseButton.button == sf::Mouse::Left)
+				{
+					table.shootBall(*window);
+				}
 
+				break;
 			}
 		}
 
 		//Update
+		
 		table.update(time.restart().asSeconds());
 
 		window->clear();

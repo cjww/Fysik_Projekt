@@ -29,10 +29,12 @@ Table::Table()
 	wallCheckRect.setPosition(tableInner.getPosition() + sf::Vector2f(ballRadius, ballRadius));
 	wallCheckRect.setSize(tableInner.getSize() - (sf::Vector2f(ballRadius, ballRadius) * 2.f));
 
-	balls.push_back(Ball(sf::Vector2f(150, 250)));
-	balls.push_back(Ball(sf::Vector2f(110, 220)));
+	float middleY = tableInner.getSize().y / 2 + tableInner.getPosition().y;
+	balls.push_back(Ball(sf::Vector2f(250, middleY), true));
+	
+	balls.push_back(Ball(sf::Vector2f(tableInner.getSize().x + tableInner.getPosition().x - 250, middleY)));
 
-	balls[0].setVelocity(sf::Vector2f(-6.f, -4.f));
+
 }
 
 
@@ -58,7 +60,6 @@ void Table::update(float dt)
 			{
 				//True
 				std::cout << "Ball collide" << std::endl;
-				
 			}
 		}
 		
@@ -74,6 +75,7 @@ void Table::update(float dt)
 			{
 				//True
 				std::cout << "Hole collide" << std::endl;
+				balls.erase(balls.begin() + i);
 			}
 		}
 
@@ -108,5 +110,14 @@ void Table::draw(sf::RenderTarget & target, sf::RenderStates states) const
 float Table::distance(sf::Vector2f a, sf::Vector2f b) const
 {
 	return std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2));
+}
+
+void Table::shootBall(sf::RenderWindow& window)
+{
+	sf::Vector2i mPos = sf::Mouse::getPosition(window);
+	sf::Vector2f ballPos = balls[0].getCircle().getPosition();
+	sf::Vector2f diff = sf::Vector2f(mPos.x - ballPos.x, mPos.y - ballPos.y);
+
+	balls[0].setVelocity(diff);
 }
 
