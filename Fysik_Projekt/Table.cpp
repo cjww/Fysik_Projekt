@@ -30,11 +30,36 @@ Table::Table()
 	wallCheckRect.setSize(tableInner.getSize() - (sf::Vector2f(ballRadius, ballRadius) * 2.f));
 
 	float middleY = tableInner.getSize().y / 2 + tableInner.getPosition().y;
+	// Set start positions for the balls
+	// White ball
 	balls.push_back(Ball(sf::Vector2f(250, middleY), true));
 	
-	balls.push_back(Ball(sf::Vector2f(tableInner.getSize().x + tableInner.getPosition().x - 250, middleY)));
+	// First balls position is stored in firstRedBall, to be used to calculate the other balls startpositions
+	sf::Vector2f firstRedBall = (sf::Vector2f(tableInner.getSize().x + tableInner.getPosition().x - 250, middleY));
+	balls.push_back(Ball(firstRedBall));
 
+	// Second line of balls
+	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 1), firstRedBall.y - (ballRadius + 0.01f))));
+	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 1), firstRedBall.y + ballRadius + 0.01f)));
 
+	
+	// Third line of balls
+	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 2), firstRedBall.y - (ballRadius*2 + 0.01f))));
+	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 2), firstRedBall.y)));
+	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 2), firstRedBall.y + (ballRadius * 2 + 0.01f))));
+
+	// Fourth line of balls
+	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 3 + 0.01f), firstRedBall.y - (ballRadius + 0.02f) - ballRadius*2)));
+	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 3 + 0.01f), firstRedBall.y - (ballRadius + 0.01f))));
+	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 3 + 0.01f), firstRedBall.y + (ballRadius + 0.01f))));
+	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 3 + 0.01f), firstRedBall.y + (ballRadius + 0.02f) + ballRadius*2)));
+
+	// Fifth line of balls
+	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 4 + 0.02f), firstRedBall.y - (ballRadius * 2 + 0.02f) - ballRadius*2)));
+	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 4 + 0.02f), firstRedBall.y - (ballRadius * 2 + 0.01f))));
+	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 4 + 0.02f), firstRedBall.y)));
+	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 4 + 0.02f), firstRedBall.y + (ballRadius * 2 + 0.01f))));
+	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 4 + 0.02f), firstRedBall.y + (ballRadius * 2 + 0.02f) + ballRadius*2)));
 }
 
 

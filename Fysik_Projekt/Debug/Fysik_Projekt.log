@@ -1,4 +1,82 @@
 ﻿  Table.cpp
-c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Fysik_Projekt.vcxproj -> C:\Users\Julius\source\repos\Fysik_Projekt\Debug\Fysik_Projekt.exe
+c:\users\joaki\dropbox\joakim\bth\år 3- ht\fysik_projekt\fysik_projekt\table.cpp(29): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joaki\dropbox\joakim\bth\år 3- ht\fysik_projekt\fysik_projekt\table.cpp(30): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joaki\dropbox\joakim\bth\år 3- ht\fysik_projekt\fysik_projekt\table.cpp(42): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joaki\dropbox\joakim\bth\år 3- ht\fysik_projekt\fysik_projekt\table.cpp(43): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joaki\dropbox\joakim\bth\år 3- ht\fysik_projekt\fysik_projekt\table.cpp(47): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joaki\dropbox\joakim\bth\år 3- ht\fysik_projekt\fysik_projekt\table.cpp(48): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joaki\dropbox\joakim\bth\år 3- ht\fysik_projekt\fysik_projekt\table.cpp(49): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joaki\dropbox\joakim\bth\år 3- ht\fysik_projekt\fysik_projekt\table.cpp(52): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joaki\dropbox\joakim\bth\år 3- ht\fysik_projekt\fysik_projekt\table.cpp(53): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joaki\dropbox\joakim\bth\år 3- ht\fysik_projekt\fysik_projekt\table.cpp(54): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joaki\dropbox\joakim\bth\år 3- ht\fysik_projekt\fysik_projekt\table.cpp(55): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joaki\dropbox\joakim\bth\år 3- ht\fysik_projekt\fysik_projekt\table.cpp(58): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joaki\dropbox\joakim\bth\år 3- ht\fysik_projekt\fysik_projekt\table.cpp(59): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joaki\dropbox\joakim\bth\år 3- ht\fysik_projekt\fysik_projekt\table.cpp(60): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joaki\dropbox\joakim\bth\år 3- ht\fysik_projekt\fysik_projekt\table.cpp(61): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\joaki\dropbox\joakim\bth\år 3- ht\fysik_projekt\fysik_projekt\table.cpp(62): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Fysik_Projekt.vcxproj -> C:\Users\joaki\Dropbox\Joakim\BTH\År 3- HT\Fysik_Projekt\Debug\Fysik_Projekt.exe
