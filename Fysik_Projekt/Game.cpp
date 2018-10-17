@@ -4,7 +4,7 @@ Game::Game()
 {
 
 	window = new sf::RenderWindow(sf::VideoMode(1200, 800), "Physics Game Lab");
-	
+	table.setWindow(window);
 
 	while (window->isOpen()) {
 		sf::Event e;
@@ -13,7 +13,7 @@ Game::Game()
 			case sf::Event::Closed:
 				window->close();
 				break;
-			case sf::Event::MouseButtonPressed:
+			case sf::Event::MouseButtonReleased:
 				if (e.mouseButton.button == sf::Mouse::Left)
 				{
 					table.shootBall(*window);

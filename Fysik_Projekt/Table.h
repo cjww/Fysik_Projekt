@@ -20,6 +20,7 @@ private:
 	int ballRadius;
 	std::vector<Ball> balls;
 
+	sf::RenderWindow* window;
 
 public:
 	Table();
@@ -35,5 +36,6 @@ public:
 
 	void setup();
 
+	void setWindow(sf::RenderWindow* window);
 };
 

@@ -14,7 +14,7 @@ Table::Table()
 	for (int i = 0; i < 6; i++) 
 	{
 		holes[i].setPointCount(16);
-		holes[i].setRadius(30);
+		holes[i].setRadius(35);
 		holes[i].setFillColor(sf::Color::Black);
 		holes[i].setOrigin(holes[i].getRadius(), holes[i].getRadius());
 	}
@@ -74,8 +74,7 @@ void Table::update(float dt)
 				std::cout << std::endl;
 				std::cout << std::endl;
 
-				//balls[i].setPosition(balls[i].getCircle().getPosition() + e_p * (float)ballRadius);
-			//balls[j].setPosition(balls[j].getCircle().getPosition() + e_p * (float)ballRadius);
+				balls[j].setPosition(balls[i].getCircle().getPosition() - e_p * ((float)ballRadius * 2));
 
 				balls[i].setVelocity(u1);
 				balls[j].setVelocity(u2);
@@ -83,11 +82,11 @@ void Table::update(float dt)
 		}
 		
 		//Ball vs Hole
+		sf::Vector2f ballPos = balls[i].getCircle().getPosition();
 		for (unsigned int j = 0; j < 6; j++)
 		{
-			sf::Vector2f ballPos = balls[i].getCircle().getPosition();
 			sf::Vector2f holePos = holes[j].getPosition();
-			float holeRadius = holes[i].getRadius();
+			float holeRadius = holes[j].getRadius();
 
 			float dist = distance(ballPos, holePos);
 			if (dist <= holeRadius) 
@@ -96,14 +95,16 @@ void Table::update(float dt)
 				std::cout << "Hole collide" << std::endl;
 				if (balls[i].getCircle().getFillColor() == sf::Color::White)
 				{
-					//TODO: Restart
 					setup();
 				}
-				else 
+				else
+				{
 					balls.erase(balls.begin() + i);
+					return;
+				}
+
 				if (balls.empty()) 
 				{
-					//TODO: Restart
 					setup();
 				}
 				
@@ -113,7 +114,7 @@ void Table::update(float dt)
 		//Ball vs Wall
 		if (!wallCheckRect.getGlobalBounds().contains(balls[i].getCircle().getPosition())) {
 			std::cout << "Wall collide" << std::endl;
-			if(balls[i].getCircle().getPosition().x >= wallCheckRect.getPosition().x + wallCheckRect.getSize().x)
+			if(balls[i].getCircle().getPosition().x > wallCheckRect.getPosition().x + wallCheckRect.getSize().x)
 			{
 				std::cout << "Right wall" << std::endl;
 				balls[i].setVelocity(sf::Vector2f(
@@ -125,7 +126,7 @@ void Table::update(float dt)
 					balls[i].getCircle().getPosition().y
 				));
 			}
-			else if (balls[i].getCircle().getPosition().x <= wallCheckRect.getPosition().x)
+			else if (balls[i].getCircle().getPosition().x < wallCheckRect.getPosition().x)
 			{
 				std::cout << "Left wall" << std::endl;
 				balls[i].setVelocity(sf::Vector2f(
@@ -137,7 +138,7 @@ void Table::update(float dt)
 					balls[i].getCircle().getPosition().y
 				));
 			}
-			else if (balls[i].getCircle().getPosition().y <= wallCheckRect.getPosition().y)
+			else if (balls[i].getCircle().getPosition().y < wallCheckRect.getPosition().y)
 			{
 				std::cout << "Top wall" << std::endl;
 				balls[i].setVelocity(sf::Vector2f(
@@ -149,7 +150,7 @@ void Table::update(float dt)
 					wallCheckRect.getPosition().y + 0.01f
 				));
 			}
-			else if (balls[i].getCircle().getPosition().y >= wallCheckRect.getPosition().y + wallCheckRect.getSize().y)
+			else if (balls[i].getCircle().getPosition().y > wallCheckRect.getPosition().y + wallCheckRect.getSize().y)
 			{
 				std::cout << "Bottom wall" << std::endl;
 				balls[i].setVelocity(sf::Vector2f(
@@ -178,7 +179,18 @@ void Table::draw(sf::RenderTarget & target, sf::RenderStates states) const
 		target.draw(holes[i]);
 	}
 	
+	//Aim
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+		sf::Vertex line[] =
+		{
+			sf::Vertex(balls[0].getCircle().getPosition()),
+			sf::Vertex((sf::Vector2f)sf::Mouse::getPosition(*window))
 
+		};
+
+		target.draw(line, 2, sf::Lines);
+
+	}
 	for (size_t i = 0; i < balls.size(); i++) 
 	{
 		target.draw(balls[i]);
@@ -189,7 +201,8 @@ void Table::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 float Table::distance(sf::Vector2f a, sf::Vector2f b) const
 {
-	return std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2));
+	sf::Vector2f diff = a - b;
+	return sqrt(pow(diff.x, 2) + pow(diff.y, 2));
 }
 
 void Table::shootBall(sf::RenderWindow& window)
@@ -237,5 +250,10 @@ void Table::setup()
 	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 4 + 0.02f), firstRedBall.y + (ballRadius * 2 + 0.01f))));
 	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 4 + 0.02f), firstRedBall.y + (ballRadius * 2 + 0.02f) + ballRadius * 2)));
 
+}
+
+void Table::setWindow(sf::RenderWindow * window)
+{
+	this->window = window;
 }
 

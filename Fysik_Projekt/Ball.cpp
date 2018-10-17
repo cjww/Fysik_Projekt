@@ -47,10 +47,14 @@ void Ball::update(float dt)
 	
 	}
 	
-	
-	dot.setPosition(ball.getPosition() + sf::Vector2f(vel.x * time + ballRadius * sin(w_f * time), vel.y * time + ballRadius * cos(w_f * time)));
+	//TODO 
+	dot.setPosition(ball.getPosition() + sf::Vector2f(vel.x + ballRadius * sin(w_f), vel.y + ballRadius * cos(w_f)));
 	//time?
+
 	ball.setPosition(ball.getPosition() + vel * dt);
+	
+	//temp
+	//vel *= 0.9995f;
 }
 
 void Ball::draw(sf::RenderTarget & target, sf::RenderStates states) const
