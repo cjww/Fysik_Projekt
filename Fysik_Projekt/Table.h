@@ -5,6 +5,8 @@
 #include <math.h>
 #include <iostream>
 
+#include "VectorMath.h"
+
 class Table : public sf::Drawable
 {
 private:
@@ -30,6 +32,8 @@ public:
 	float distance(sf::Vector2f a, sf::Vector2f b) const;
 
 	void shootBall(sf::RenderWindow& window);
+
+	void setup();
 
 };
 
