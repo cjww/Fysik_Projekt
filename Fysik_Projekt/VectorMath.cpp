@@ -9,11 +9,16 @@ float dotProduct(sf::Vector2f firstVector, sf::Vector2f secondVector) {
 
 sf::Vector2f normalize(sf::Vector2f vector)
 {
-	float length = sqrt(pow(vector.x, 2) + pow(vector.y, 2));
-	if(length != 0)
-		return (vector / length);
+	float len = length(vector);
+	if(len != 0)
+		return (vector / len);
 	else 
 		return vector;
+}
+
+float length(sf::Vector2f vec) 
+{
+	return sqrt(pow(vec.x, 2) + pow(vec.y, 2));
 }
 
 sf::Vector2f crossProduct(sf::Vector2f firstVector, sf::Vector2f secondVector)

@@ -3,6 +3,9 @@
 
 #include <math.h>
 #include <iostream>
+
+#include "VectorMath.h"
+
 class Ball : public sf::Drawable
 {
 private:
@@ -32,7 +35,6 @@ public:
 	sf::CircleShape getCircle() const;
 
 	sf::Vector2f getVelocity() const;
-	float getVelocityLength() const;
 	void setVelocity(sf::Vector2f vel);
 
 	void setPosition(sf::Vector2f pos);

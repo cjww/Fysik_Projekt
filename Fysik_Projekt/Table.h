@@ -5,7 +5,6 @@
 #include <math.h>
 #include <iostream>
 
-#include "VectorMath.h"
 
 class Table : public sf::Drawable
 {

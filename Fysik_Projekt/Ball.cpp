@@ -33,18 +33,21 @@ void Ball::update(float dt)
 {
 	time += dt;
 	//Fysik för bollen
-	float slideCof = 0.2f;
-	float g = 9.82f;
-	if (false) 
+	if (length(vel) > 0.01f) 
 	{
-		//float wf = getVelocityLength() / ballRadius;
+		float slideCof = 0.2f;
+		float g = 9.82f;
+		if (false) 
+		{
+			//float wf = length(vel) / ballRadius;
 
-	}
-	else
-	{
-		//Glidfas
-		w_f += (5 * slideCof * g) / (ballRadius * 2);
+		}
+		else
+		{
+			//Glidfas
+			w_f += ((5 * slideCof * g) / (ballRadius * 2) * dt);
 	
+		}
 	}
 	
 	//TODO 
@@ -71,11 +74,6 @@ sf::CircleShape Ball::getCircle() const
 sf::Vector2f Ball::getVelocity() const
 {
 	return this->vel;
-}
-
-float Ball::getVelocityLength() const
-{
-	return sqrt(pow(vel.x, 2) + pow(vel.y, 2));
 }
 
 void Ball::setVelocity(sf::Vector2f vel)
