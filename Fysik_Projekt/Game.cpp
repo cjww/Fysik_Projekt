@@ -26,7 +26,7 @@ Game::Game()
 		//Update
 		
 		table.update(time.restart().asSeconds());
-
+		//table.update(0.01f);
 		window->clear();
 
 		//Draw
@@ -34,6 +34,8 @@ Game::Game()
 		window->draw(table);
 
 		window->display();
+		
+		//Sleep(500);
 	}
 }
 

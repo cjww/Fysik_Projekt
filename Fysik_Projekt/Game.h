@@ -4,6 +4,8 @@
 #include <vector>
 #include "Table.h"
 
+#include <Windows.h>
+
 class Game
 {
 private:

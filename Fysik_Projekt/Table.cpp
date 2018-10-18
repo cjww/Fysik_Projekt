@@ -25,7 +25,7 @@ Table::Table()
 	holes[4].setPosition(sf::Vector2f(600, 150));
 	holes[5].setPosition(sf::Vector2f(600, 650));
 
-	ballRadius = 15;
+	ballRadius = 14.8f;
 	wallCheckRect.setPosition(tableInner.getPosition() + sf::Vector2f(ballRadius, ballRadius));
 	wallCheckRect.setSize(tableInner.getSize() - (sf::Vector2f(ballRadius, ballRadius) * 2.f));
 
@@ -44,26 +44,44 @@ void Table::update(float dt)
 		
 		//--Collision--
 		//Ball vs Ball
-		for (size_t j = i + 1; j < balls.size(); j++) 
+		for (size_t j = i + 1; j < balls.size(); j++)
 		{
+			//if (j == i) continue;
 			sf::Vector2f pos_a = balls[i].getCircle().getPosition();
 			sf::Vector2f pos_b = balls[j].getCircle().getPosition();
-		
+
 			float dist = distance(pos_a, pos_b);
 			if (dist <= ballRadius * 2)
 			{
+				
 				//True
 				sf::Vector2f e_p = normalize(pos_a - pos_b);
+				//float magicNumber = balls[i].getVelocity().x * e_p.y - balls[i].getVelocity().y * e_p.x;
+				float magicNumber = abs(balls[i].getVelocity().x * e_p.y - balls[i].getVelocity().y * e_p.x);
+				//float magicNumber = abs(balls[i].getVelocity().y * e_p.x - balls[i].getVelocity().x * e_p.y);
+
+				sf::Vector2f e_n;
+
 				float v1_p = dotProduct(balls[i].getVelocity(), e_p);
 				float v2_p = dotProduct(balls[j].getVelocity(), e_p);
 				float m1 = balls[i].BALL_MASS;
 				float m2 = balls[j].BALL_MASS;
 				float e = balls[i].E_BALL;
-				float u1_p = ((m1 - (e * m2) * v1_p) / (m1 + m2)) + (((1 + e) * m2 * v2_p) / (m1 + m2));
-				float u2_p = (((1 + e) * m1 * v1_p) / (m1 + m2)) + ((m2 - (m1 * e) * v2_p) / (m1 + m2));
+				float u1_p = (((m1 - e * m2) * v1_p) / (m1 + m2)) + (((1 + e) * m2 * v2_p) / (m1 + m2));
+				float u2_p = (((1 + e) * m1 * v1_p) / (m1 + m2)) + (((m2 - m1 * e) * v2_p) / (m1 + m2));
+				
+
 				sf::Vector2f u1 = balls[i].getVelocity() + (u1_p - v1_p) * e_p;
 				sf::Vector2f u2 = balls[j].getVelocity() + (u2_p - v2_p) * e_p;
+				if (magicNumber > 0.1f)
+				{
+					e_n = normalize(sf::Vector2f(-magicNumber * e_p.y, magicNumber * e_p.x) / magicNumber);
 
+					u1 = balls[i].getVelocity() + (u1_p - v1_p) * (e_p + (e_n));
+					u2 = balls[j].getVelocity() + (u2_p - v2_p) * (e_p + (e_n));
+				}
+
+				/*
 				std::cout << "v1_p: " << v1_p << std::endl;
 				std::cout << "v2_p: " << v2_p << std::endl;
 				std::cout << "m1: "	<< m1 << std::endl;
@@ -73,12 +91,29 @@ void Table::update(float dt)
 				std::cout << "u2_p: "<< u2_p << std::endl;
 				std::cout << std::endl;
 				std::cout << std::endl;
+				*/
+				std::cout << magicNumber << std::endl;
 
-				balls[j].setPosition(balls[i].getCircle().getPosition() - e_p * ((float)ballRadius * 2));
+				/*
+				if (length(balls[i].getVelocity()) < 0.01f) 
+				{
+					balls[j].setPosition(balls[i].getCircle().getPosition() - e_p * ((float)ballRadius * 2));
+				}
+				else if (length(balls[j].getVelocity()) < 0.01f) 
+				{
+					balls[i].setPosition(balls[j].getCircle().getPosition() + e_p * ((float)ballRadius * 2));
+				}
+				else {
+
+				}
+				*/
+					balls[j].setPosition(balls[i].getCircle().getPosition() - e_p * ((float)ballRadius * 2));
 
 				balls[i].setVelocity(u1);
 				balls[j].setVelocity(u2);
+
 			}
+			std::cout << "length: " << length(balls[j].getVelocity()) << std::endl;
 		}
 		
 		//Ball vs Hole
@@ -229,6 +264,7 @@ void Table::setup()
 
 	// Second line of balls
 	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 1), firstRedBall.y - (ballRadius + 0.01f))));
+	/*
 	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 1), firstRedBall.y + ballRadius + 0.01f)));
 
 
@@ -249,6 +285,7 @@ void Table::setup()
 	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 4 + 0.02f), firstRedBall.y)));
 	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 4 + 0.02f), firstRedBall.y + (ballRadius * 2 + 0.01f))));
 	balls.push_back(Ball(sf::Vector2f(firstRedBall.x + (sqrt(3) * ballRadius * 4 + 0.02f), firstRedBall.y + (ballRadius * 2 + 0.02f) + ballRadius * 2)));
+	*/
 
 }
 

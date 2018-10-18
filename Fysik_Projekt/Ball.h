@@ -3,6 +3,7 @@
 
 #include <math.h>
 #include <iostream>
+#include <string>
 
 #include "VectorMath.h"
 
@@ -21,7 +22,7 @@ private:
 
 	float w_f;
 public:
-	float BALL_MASS = 0.17f;
+	float BALL_MASS = 0.16f;
 	float E_WALL = 0.6f; //0.6 - 0.9
 	float E_BALL = 0.93f;
 

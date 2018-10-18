@@ -2,10 +2,12 @@
 
 Ball::Ball(sf::Vector2f pos, bool whiteBall)
 {
-	ballRadius = 15;
+	ballRadius = 14.8f;
 	ball.setRadius(ballRadius);
-	if (whiteBall)
+	if (whiteBall) {
 		ball.setFillColor(sf::Color::White);
+		BALL_MASS = 0.17f;
+	}
 	else
 		ball.setFillColor(sf::Color::Red);
 	ball.setOutlineColor(sf::Color::Transparent);
@@ -32,11 +34,11 @@ Ball::~Ball()
 void Ball::update(float dt)
 {
 	time += dt;
+	float slideCof = 0.2f;
+	float g = 9.82f;
 	//Fysik för bollen
 	if (length(vel) > 0.01f) 
 	{
-		float slideCof = 0.2f;
-		float g = 9.82f;
 		if (false) 
 		{
 			//float wf = length(vel) / ballRadius;
@@ -46,15 +48,19 @@ void Ball::update(float dt)
 		{
 			//Glidfas
 			w_f += ((5 * slideCof * g) / (ballRadius * 2) * dt);
+			//vel = sf::Vector2f(vel.x - slideCof * g * dt, vel.y - slideCof * g * dt);
 	
 		}
 	}
 	
 	//TODO 
-	dot.setPosition(ball.getPosition() + sf::Vector2f(vel.x + ballRadius * sin(w_f), vel.y + ballRadius * cos(w_f)));
+	//dot.setPosition(ball.getPosition() + sf::Vector2f(vel.x + ballRadius * sin(w_f), vel.y + ballRadius * cos(w_f)));
+	dot.setPosition(ball.getPosition() + sf::Vector2f(ballRadius * sin(w_f), ballRadius * cos(w_f)));
+
 	//time?
 
 	ball.setPosition(ball.getPosition() + vel * dt);
+	vel = vel - normalize(vel) * slideCof * g * dt; //Glidfas
 	
 	//temp
 	//vel *= 0.9995f;
@@ -62,8 +68,24 @@ void Ball::update(float dt)
 
 void Ball::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
+	sf::Vertex velLine[] =
+	{
+		sf::Vertex(ball.getPosition()),
+		sf::Vertex(ball.getPosition() + vel)
+	};
+	target.draw(velLine, 2, sf::Lines);
+
 	target.draw(ball);
 	target.draw(dot);
+
+	sf::Font font;
+	font.loadFromFile("../Resources/VCR.ttf");
+	sf::Text text;
+	text.setFont(font);
+	text.setPosition(ball.getPosition() + sf::Vector2f(-20, -35));
+	text.setString(std::to_string((int)length(vel)));
+	text.setCharacterSize(20);
+	target.draw(text);
 }
 
 sf::CircleShape Ball::getCircle() const
