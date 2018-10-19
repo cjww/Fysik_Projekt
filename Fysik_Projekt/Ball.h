@@ -14,11 +14,16 @@ private:
 	sf::CircleShape dot;
 
 	sf::Vector2f vel;
+	sf::Vector2f a;
+
+	float rollFriction;
+	float skidFriction;
+	float g;
+
 	float ballRadius;
+	float realRadius;
 
 	bool mousePressed;
-
-	float time;
 
 	float w_f;
 public:

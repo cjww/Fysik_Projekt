@@ -113,7 +113,6 @@ void Table::update(float dt)
 				balls[j].setVelocity(u2);
 
 			}
-			std::cout << "length: " << length(balls[j].getVelocity()) << std::endl;
 		}
 		
 		//Ball vs Hole

@@ -23,7 +23,13 @@ Ball::Ball(sf::Vector2f pos, bool whiteBall)
 	dot.setPosition(ball.getPosition());
 	dot.setFillColor(sf::Color::Blue);
 
-	w_f = 0;
+	w_f = 0.0f;
+	skidFriction = 0.2f;
+	rollFriction = 0.01f;
+	g = 9.82f;
+	//realRadius = 0.028575f;
+	realRadius = ballRadius / sfmlScaleFactor;
+
 }
 
 
@@ -33,37 +39,39 @@ Ball::~Ball()
 
 void Ball::update(float dt)
 {
-	time += dt;
-	float slideCof = 0.2f;
-	float g = 9.82f;
 	//Fysik för bollen
-	if (length(vel) > 0.01f) 
+	if (length(vel) / sfmlScaleFactor > 0.01f) 
 	{
-		if (false) 
+		w_f += ((5 * skidFriction * g * dt) / (realRadius * 2));
+
+		if (length(vel) / sfmlScaleFactor < realRadius * w_f) 
 		{
+			std::cout << "Rullfas" << std::endl;
+			//Rullfas
 			//float wf = length(vel) / ballRadius;
+			a = rollFriction * g * normalize(vel);
 
 		}
 		else
 		{
+			std::cout << "Glidfas" << std::endl;
 			//Glidfas
-			w_f += ((5 * slideCof * g) / (ballRadius * 2) * dt);
-			//vel = sf::Vector2f(vel.x - slideCof * g * dt, vel.y - slideCof * g * dt);
-	
+			//vel = sf::Vector2f(vel.x - skidFriction * g * dt, vel.y - skidFriction * g * dt);
+			a = skidFriction * g * normalize(vel);
 		}
+	}
+	else
+	{
+		a = sf::Vector2f(0.f, 0.f);
+		vel = sf::Vector2f(0.f, 0.f);
 	}
 	
 	//TODO 
 	//dot.setPosition(ball.getPosition() + sf::Vector2f(vel.x + ballRadius * sin(w_f), vel.y + ballRadius * cos(w_f)));
-	dot.setPosition(ball.getPosition() + sf::Vector2f(ballRadius * sin(w_f), ballRadius * cos(w_f)));
+	//dot.setPosition(ball.getPosition() + sf::Vector2f(ballRadius * sin(w_f), ballRadius * cos(w_f)));
 
-	//time?
-
+	vel = vel - a * sfmlScaleFactor * dt;
 	ball.setPosition(ball.getPosition() + vel * dt);
-	vel = vel - normalize(vel) * slideCof * g * dt; //Glidfas
-	
-	//temp
-	//vel *= 0.9995f;
 }
 
 void Ball::draw(sf::RenderTarget & target, sf::RenderStates states) const
@@ -76,14 +84,14 @@ void Ball::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(velLine, 2, sf::Lines);
 
 	target.draw(ball);
-	target.draw(dot);
+	//target.draw(dot);
 
 	sf::Font font;
 	font.loadFromFile("../Resources/VCR.ttf");
 	sf::Text text;
 	text.setFont(font);
 	text.setPosition(ball.getPosition() + sf::Vector2f(-20, -35));
-	text.setString(std::to_string((int)length(vel)));
+	text.setString(std::to_string((int)length(vel) / sfmlScaleFactor));
 	text.setCharacterSize(20);
 	target.draw(text);
 }
