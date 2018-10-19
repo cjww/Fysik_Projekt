@@ -2,14 +2,17 @@
 
 Ball::Ball(sf::Vector2f pos, bool whiteBall)
 {
-	ballRadius = 14.8f;
-	ball.setRadius(ballRadius);
+	sfmlBallRadius = BALL_RADIUS;
+	ball.setRadius(sfmlBallRadius);
 	if (whiteBall) {
 		ball.setFillColor(sf::Color::White);
-		BALL_MASS = 0.17f;
+		mass = 0.17f;
 	}
 	else
+	{
 		ball.setFillColor(sf::Color::Red);
+		mass = 0.16f;
+	}
 	ball.setOutlineColor(sf::Color::Transparent);
 	ball.setPointCount(16);
 	ball.setOrigin(ball.getRadius(), ball.getRadius());
@@ -17,8 +20,9 @@ Ball::Ball(sf::Vector2f pos, bool whiteBall)
 
 	mousePressed = false;
 	
-	dot.setRadius(3);
-	dot.setPointCount(5);
+	dotRadius = 3;
+	dot.setRadius(dotRadius);
+	dot.setPointCount(6);
 	dot.setOrigin(dot.getRadius(), dot.getRadius());
 	dot.setPosition(ball.getPosition());
 	dot.setFillColor(sf::Color::Blue);
@@ -27,8 +31,8 @@ Ball::Ball(sf::Vector2f pos, bool whiteBall)
 	skidFriction = 0.2f;
 	rollFriction = 0.01f;
 	g = 9.82f;
-	//realRadius = 0.028575f;
-	realRadius = ballRadius / sfmlScaleFactor;
+	//realBallRadius = 0.028575f;
+	realBallRadius = sfmlBallRadius / sfmlScaleFactor;
 
 }
 
@@ -42,21 +46,21 @@ void Ball::update(float dt)
 	//Fysik för bollen
 	if (length(vel) / sfmlScaleFactor > 0.01f) 
 	{
-		w_f += ((5 * skidFriction * g * dt) / (realRadius * 2));
 
-		if (length(vel) / sfmlScaleFactor < realRadius * w_f) 
+		if (length(vel) / sfmlScaleFactor < realBallRadius * w_f) 
 		{
-			std::cout << "Rullfas" << std::endl;
+
 			//Rullfas
-			//float wf = length(vel) / ballRadius;
+			//std::cout << "Rullfas" << std::endl;
+			w_f = length(vel);
 			a = rollFriction * g * normalize(vel);
 
 		}
 		else
 		{
-			std::cout << "Glidfas" << std::endl;
 			//Glidfas
-			//vel = sf::Vector2f(vel.x - skidFriction * g * dt, vel.y - skidFriction * g * dt);
+			//std::cout << "Glidfas" << std::endl;
+			w_f += ((5 * skidFriction * g * dt) / (realBallRadius * 2));
 			a = skidFriction * g * normalize(vel);
 		}
 	}
@@ -64,14 +68,13 @@ void Ball::update(float dt)
 	{
 		a = sf::Vector2f(0.f, 0.f);
 		vel = sf::Vector2f(0.f, 0.f);
+		w_f = 0.0f;
 	}
 	
-	//TODO 
-	//dot.setPosition(ball.getPosition() + sf::Vector2f(vel.x + ballRadius * sin(w_f), vel.y + ballRadius * cos(w_f)));
-	//dot.setPosition(ball.getPosition() + sf::Vector2f(ballRadius * sin(w_f), ballRadius * cos(w_f)));
-
 	vel = vel - a * sfmlScaleFactor * dt;
 	ball.setPosition(ball.getPosition() + vel * dt);
+	std::cout << w_f << std::endl;
+	dot.setPosition(ball.getPosition() + normalize(vel) * sin(w_f * length(vel) / sfmlScaleFactor) * (sfmlBallRadius - dotRadius * 2));
 }
 
 void Ball::draw(sf::RenderTarget & target, sf::RenderStates states) const
@@ -84,7 +87,16 @@ void Ball::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(velLine, 2, sf::Lines);
 
 	target.draw(ball);
-	//target.draw(dot);
+	//if((w_f * length(vel) / sfmlScaleFactor) * 3.141592 < 0.f )
+	float sinValue = w_f * length(vel) / sfmlScaleFactor;
+	while (sinValue > PI * 2)
+	{
+		sinValue -= PI * 2;
+	}
+	if (sinValue > 0 && sinValue < PI)
+	{
+		target.draw(dot);
+	}
 
 	sf::Font font;
 	font.loadFromFile("../Resources/VCR.ttf");
@@ -113,4 +125,9 @@ void Ball::setVelocity(sf::Vector2f vel)
 
 void Ball::setPosition(sf::Vector2f pos) {
 	ball.setPosition(pos);
+}
+
+float Ball::getMass() const
+{
+	return mass;
 }

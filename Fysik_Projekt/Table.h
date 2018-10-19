@@ -12,11 +12,12 @@ private:
 	sf::RectangleShape tableOuter;
 	sf::RectangleShape tableInner;
 
-	sf::RectangleShape wallCheckRect;
+	sf::RectangleShape wallcheckRectangle;
 
 	sf::CircleShape holes[6];
 
-	int ballRadius;
+	int sfmlBallRadius;
+	const float frictionBallvBall = 0.05f;
 	std::vector<Ball> balls;
 
 	sf::RenderWindow* window;
@@ -28,8 +29,6 @@ public:
 	void update(float dt);
 
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
-
-	float distance(sf::Vector2f a, sf::Vector2f b) const;
 
 	void shootBall(sf::RenderWindow& window);
 

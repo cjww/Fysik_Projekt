@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 
-#include "VectorMath.h"
+#include "functions.h"
 
 class Ball : public sf::Drawable
 {
@@ -18,31 +18,27 @@ private:
 
 	float rollFriction;
 	float skidFriction;
+	float mass;
+	float w_f;
 	float g;
 
-	float ballRadius;
-	float realRadius;
+	float sfmlBallRadius;
+	float realBallRadius;
+	float dotRadius;
 
 	bool mousePressed;
 
-	float w_f;
 public:
-	float BALL_MASS = 0.16f;
-	float E_WALL = 0.6f; //0.6 - 0.9
-	float E_BALL = 0.93f;
-
 	Ball(sf::Vector2f pos, bool whiteBall = false);
 	virtual ~Ball();
 
 	void update(float dt);
-
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	sf::CircleShape getCircle() const;
-
 	sf::Vector2f getVelocity() const;
-	void setVelocity(sf::Vector2f vel);
+	float getMass() const;
 
+	void setVelocity(sf::Vector2f vel);
 	void setPosition(sf::Vector2f pos);
 };
-
