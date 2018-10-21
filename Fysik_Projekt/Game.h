@@ -10,9 +10,7 @@ class Game
 {
 private:
 	sf::Clock time;
-
 	sf::RenderWindow * window;
-
 	Table table;
 
 public:

@@ -5,7 +5,6 @@
 #include <math.h>
 #include <iostream>
 
-
 class Table : public sf::Drawable
 {
 private:
@@ -36,4 +35,3 @@ public:
 
 	void setWindow(sf::RenderWindow* window);
 };
-

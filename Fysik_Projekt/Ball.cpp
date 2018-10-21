@@ -31,11 +31,8 @@ Ball::Ball(sf::Vector2f pos, bool whiteBall)
 	skidFriction = 0.2f;
 	rollFriction = 0.01f;
 	g = 9.82f;
-	//realBallRadius = 0.028575f;
 	realBallRadius = sfmlBallRadius / sfmlScaleFactor;
-
 }
-
 
 Ball::~Ball()
 {
@@ -49,18 +46,16 @@ void Ball::update(float dt)
 
 		if (length(vel) / sfmlScaleFactor < realBallRadius * w_f) 
 		{
-
 			//Rullfas
-			//std::cout << "Rullfas" << std::endl;
+			std::cout << "Rullfas" << std::endl;
 			w_f = length(vel);
 			a = rollFriction * g * normalize(vel);
-
 		}
 		else
 		{
 			//Glidfas
-			//std::cout << "Glidfas" << std::endl;
-			w_f += ((5 * skidFriction * g * dt) / (realBallRadius * 2));
+			std::cout << "Glidfas" << std::endl;
+			w_f += ((5 * skidFriction * g * dt  / (realBallRadius * 2)));
 			a = skidFriction * g * normalize(vel);
 		}
 	}
@@ -73,8 +68,7 @@ void Ball::update(float dt)
 	
 	vel = vel - a * sfmlScaleFactor * dt;
 	ball.setPosition(ball.getPosition() + vel * dt);
-	std::cout << w_f << std::endl;
-	dot.setPosition(ball.getPosition() + normalize(vel) * sin(w_f * length(vel) / sfmlScaleFactor) * (sfmlBallRadius - dotRadius * 2));
+	dot.setPosition(ball.getPosition() + normalize(vel) * cos(w_f * length(vel) / sfmlScaleFactor) * (sfmlBallRadius - dotRadius * 2));
 }
 
 void Ball::draw(sf::RenderTarget & target, sf::RenderStates states) const
@@ -87,13 +81,14 @@ void Ball::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(velLine, 2, sf::Lines);
 
 	target.draw(ball);
-	//if((w_f * length(vel) / sfmlScaleFactor) * 3.141592 < 0.f )
-	float sinValue = w_f * length(vel) / sfmlScaleFactor;
-	while (sinValue > PI * 2)
+	
+	// Gör så att värdet inom cos är inom 0-180 då punkten endast ska synas när den är "över" bollen.
+	float cosValue = w_f * length(vel) / sfmlScaleFactor;
+	while (cosValue > (PI * 2))
 	{
-		sinValue -= PI * 2;
+		cosValue -= (PI * 2);
 	}
-	if (sinValue > 0 && sinValue < PI)
+	if (cosValue >= 0 && cosValue <= PI)
 	{
 		target.draw(dot);
 	}

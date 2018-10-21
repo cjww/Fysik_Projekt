@@ -1,6 +1,5 @@
 #include "Table.h"
 
-
 Table::Table()
 {
 	tableOuter.setSize(sf::Vector2f(1200, 600));
@@ -34,7 +33,6 @@ Table::Table()
 
 }
 
-
 Table::~Table()
 {
 }
@@ -42,8 +40,7 @@ Table::~Table()
 void Table::update(float dt)
 {
 	for (size_t i = 0; i < balls.size(); i++) 
-	{
-		
+	{	
 		//--Collision--
 		//Ball vs Ball
 		for (size_t j = i + 1; j < balls.size(); j++)
@@ -65,7 +62,6 @@ void Table::update(float dt)
 				float u1_p = (((m1 - e * m2) * v1_p) / (m1 + m2)) + (((1 + e) * m2 * v2_p) / (m1 + m2));
 				float u2_p = (((1 + e) * m1 * v1_p) / (m1 + m2)) + (((m2 - m1 * e) * v2_p) / (m1 + m2));
 				
-
 				sf::Vector2f u1 = balls[i].getVelocity() + (u1_p - v1_p) * e_p;
 				sf::Vector2f u2 = balls[j].getVelocity() + (u2_p - v2_p) * e_p;
 				if (magicNumber > 0.1f)
@@ -80,10 +76,9 @@ void Table::update(float dt)
 
 				balls[i].setVelocity(u1);
 				balls[j].setVelocity(u2);
-
 			}
 		}
-		
+	
 		//Ball vs Hole
 		sf::Vector2f ballPos = balls[i].getCircle().getPosition();
 		for (unsigned int j = 0; j < 6; j++)
@@ -109,8 +104,7 @@ void Table::update(float dt)
 				if (balls.empty()) 
 				{
 					setup();
-				}
-				
+				}			
 			}
 		}
 
@@ -164,7 +158,6 @@ void Table::update(float dt)
 		}
 		balls[i].update(dt);
 	}
-
 }
 
 void Table::draw(sf::RenderTarget & target, sf::RenderStates states) const
@@ -244,4 +237,3 @@ void Table::setWindow(sf::RenderWindow * window)
 {
 	this->window = window;
 }
-

@@ -9,7 +9,6 @@ sf::Vector2f normalize(sf::Vector2f vector)
 		return vector;
 }
 
-
 sf::Vector2f crossProduct(sf::Vector2f firstVector, sf::Vector2f secondVector)
 {
 	int a = firstVector.x * secondVector.y;
@@ -43,4 +42,3 @@ float min(float a, float b){
 		return b;
 
 }
-

@@ -2,7 +2,6 @@
 
 Game::Game()
 {
-
 	window = new sf::RenderWindow(sf::VideoMode(1200, 800), "Physics Game Lab");
 	table.setWindow(window);
 
@@ -18,27 +17,22 @@ Game::Game()
 				{
 					table.shootBall(*window);
 				}
-
 				break;
 			}
 		}
 
-		//Update
-		
+		// Updatera fysik för objekt
 		table.update(time.restart().asSeconds());
-		//table.update(0.01f);
+
+		// Rensa skärmen
 		window->clear();
 
-		//Draw
-
+		// Rita ut saker
 		window->draw(table);
 
 		window->display();
-		
-		//Sleep(500);
 	}
 }
-
 
 Game::~Game()
 {
