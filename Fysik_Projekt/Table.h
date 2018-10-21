@@ -18,6 +18,7 @@ private:
 	int sfmlBallRadius;
 	const float frictionBallvBall = 0.05f;
 	std::vector<Ball> balls;
+	unsigned int shots;
 
 	sf::RenderWindow* window;
 
@@ -34,4 +35,7 @@ public:
 	void setup();
 
 	void setWindow(sf::RenderWindow* window);
+
+	unsigned int getNrOfBallsLeft() const;
+	unsigned int getNrOfShots() const;
 };

@@ -188,16 +188,30 @@ void Table::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 void Table::shootBall(sf::RenderWindow& window)
 {
-	sf::Vector2i mPos = sf::Mouse::getPosition(window);
-	sf::Vector2f ballPos = balls[0].getCircle().getPosition();
-	sf::Vector2f diff = sf::Vector2f(mPos.x - ballPos.x, mPos.y - ballPos.y);
+	bool isMoving = false;
+	for (int i = 0; i < balls.size(); i++)
+	{
+		if (length(balls[i].getVelocity()) != 0.0f)
+		{
+			isMoving = true;
+			break;
+		}
+	}
+	if (!isMoving)
+	{
+		sf::Vector2i mPos = sf::Mouse::getPosition(window);
+		sf::Vector2f ballPos = balls[0].getCircle().getPosition();
+		sf::Vector2f diff = sf::Vector2f(mPos.x - ballPos.x, mPos.y - ballPos.y);
 
-	balls[0].setVelocity(diff);
+		balls[0].setVelocity(diff);
+		shots++;
+	}
 }
 
 void Table::setup()
 {
 	balls.clear();
+	shots = 0;
 
 	float middleY = tableInner.getSize().y / 2 + tableInner.getPosition().y;
 	// Set start positions for the balls
@@ -237,3 +251,14 @@ void Table::setWindow(sf::RenderWindow * window)
 {
 	this->window = window;
 }
+
+unsigned int Table::getNrOfBallsLeft() const
+{
+	return balls.size();
+}
+
+unsigned int Table::getNrOfShots() const
+{
+	return shots;
+}
+
