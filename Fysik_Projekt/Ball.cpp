@@ -29,7 +29,7 @@ Ball::Ball(sf::Vector2f pos, bool whiteBall)
 
 	w_f = 0.0f;
 	skidFriction = 0.2f;
-	rollFriction = 0.01f;
+	rollFriction = 0.015f;
 	g = 9.82f;
 	realBallRadius = sfmlBallRadius / sfmlScaleFactor;
 }
@@ -47,14 +47,14 @@ void Ball::update(float dt)
 		if (length(vel) / sfmlScaleFactor < realBallRadius * w_f) 
 		{
 			//Rullfas
-			std::cout << "Rullfas" << std::endl;
+			//std::cout << "Rullfas" << std::endl;
 			w_f = length(vel);
 			a = rollFriction * g * normalize(vel);
 		}
 		else
 		{
 			//Glidfas
-			std::cout << "Glidfas" << std::endl;
+			//std::cout << "Glidfas" << std::endl;
 			w_f += ((5 * skidFriction * g * dt  / (realBallRadius * 2)));
 			a = skidFriction * g * normalize(vel);
 		}
