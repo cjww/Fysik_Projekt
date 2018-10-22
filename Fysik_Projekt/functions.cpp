@@ -17,7 +17,8 @@ sf::Vector2f crossProduct(sf::Vector2f firstVector, sf::Vector2f secondVector)
 	return (sf::Vector2f(a, -b));
 }
 
-float dotProduct(sf::Vector2f firstVector, sf::Vector2f secondVector) {
+float dotProduct(sf::Vector2f firstVector, sf::Vector2f secondVector) 
+{
 	int a = firstVector.x * secondVector.x;
 	int b = firstVector.y * secondVector.y;
 
@@ -35,10 +36,10 @@ float distance(sf::Vector2f a, sf::Vector2f b)
 	return length(diff);
 }
 
-float min(float a, float b){
+float min(float a, float b)
+{
 	if (a < b) 
 		return a;
 	else 
 		return b;
-
 }

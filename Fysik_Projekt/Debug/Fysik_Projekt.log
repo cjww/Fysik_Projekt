@@ -1,2 +1,33 @@
 ﻿  Ball.cpp
-  Fysik_Projekt.vcxproj -> C:\Users\Julius Wendt\Documents\GitHub\Fysik_Projekt\Debug\Fysik_Projekt.exe
+  Generating Code...
+  Compiling...
+  main.cpp
+  functions.cpp
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\functions.cpp(14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\functions.cpp(15): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\functions.cpp(17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\functions.cpp(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\functions.cpp(23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\functions.cpp(25): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  Table.cpp
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(196): warning C4018: '<': signed/unsigned mismatch
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(230): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(231): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(235): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(236): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(237): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(240): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(241): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(242): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(243): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(246): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(247): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(248): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(249): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\julius\source\repos\fysik_projekt\fysik_projekt\table.cpp(250): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Game.cpp
+  Generating Code...
+  Fysik_Projekt.vcxproj -> C:\Users\Julius\source\repos\Fysik_Projekt\Debug\Fysik_Projekt.exe

@@ -25,7 +25,7 @@ Ball::Ball(sf::Vector2f pos, bool whiteBall)
 	dot.setPointCount(6);
 	dot.setOrigin(dot.getRadius(), dot.getRadius());
 	dot.setPosition(ball.getPosition());
-	dot.setFillColor(sf::Color::Blue);
+	dot.setFillColor(sf::Color::Black);
 
 	w_f = 0.0f;
 	skidFriction = 0.2f;
@@ -47,14 +47,12 @@ void Ball::update(float dt)
 		if (length(vel) / sfmlScaleFactor < realBallRadius * w_f) 
 		{
 			//Rullfas
-			//std::cout << "Rullfas" << std::endl;
 			w_f = length(vel);
 			a = rollFriction * g * normalize(vel);
 		}
 		else
 		{
 			//Glidfas
-			//std::cout << "Glidfas" << std::endl;
 			w_f += ((5 * skidFriction * g * dt  / (realBallRadius * 2)));
 			a = skidFriction * g * normalize(vel);
 		}
@@ -78,7 +76,7 @@ void Ball::draw(sf::RenderTarget & target, sf::RenderStates states) const
 		sf::Vertex(ball.getPosition()),
 		sf::Vertex(ball.getPosition() + vel)
 	};
-	target.draw(velLine, 2, sf::Lines);
+	//target.draw(velLine, 2, sf::Lines);
 
 	target.draw(ball);
 	
@@ -92,7 +90,7 @@ void Ball::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	{
 		target.draw(dot);
 	}
-
+	
 	sf::Font font;
 	font.loadFromFile("../Resources/VCR.ttf");
 	sf::Text text;
@@ -100,7 +98,7 @@ void Ball::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	text.setPosition(ball.getPosition() + sf::Vector2f(-20, -35));
 	text.setString(std::to_string((int)length(vel) / sfmlScaleFactor));
 	text.setCharacterSize(20);
-	target.draw(text);
+	//target.draw(text);
 }
 
 sf::CircleShape Ball::getCircle() const

@@ -114,7 +114,8 @@ void Table::update(float dt)
 			{
 				balls[i].setVelocity(sf::Vector2f(
 					-balls[i].getVelocity().x * E_WALL,
-					balls[i].getVelocity().y * E_WALL));
+					balls[i].getVelocity().y * E_WALL
+				));
 				
 				balls[i].setPosition(sf::Vector2f(
 					wallcheckRectangle.getPosition().x + wallcheckRectangle.getSize().x - 0.01f,
@@ -125,7 +126,8 @@ void Table::update(float dt)
 			{
 				balls[i].setVelocity(sf::Vector2f(
 					-balls[i].getVelocity().x * E_WALL,
-					balls[i].getVelocity().y * E_WALL));
+					balls[i].getVelocity().y * E_WALL
+				));
 				
 				balls[i].setPosition(sf::Vector2f(
 					wallcheckRectangle.getPosition().x + 0.01f,
@@ -136,7 +138,8 @@ void Table::update(float dt)
 			{
 				balls[i].setVelocity(sf::Vector2f(
 					balls[i].getVelocity().x * E_WALL,
-					-balls[i].getVelocity().y * E_WALL));
+					-balls[i].getVelocity().y * E_WALL
+				));
 				
 				balls[i].setPosition(sf::Vector2f(
 					balls[i].getCircle().getPosition().x,
@@ -147,7 +150,8 @@ void Table::update(float dt)
 			{
 				balls[i].setVelocity(sf::Vector2f(
 					balls[i].getVelocity().x * E_WALL,
-					-balls[i].getVelocity().y * E_WALL));
+					-balls[i].getVelocity().y * E_WALL
+				));
 				
 				balls[i].setPosition(sf::Vector2f(
 					balls[i].getCircle().getPosition().x,
@@ -203,7 +207,7 @@ void Table::shootBall(sf::RenderWindow& window)
 		sf::Vector2f ballPos = balls[0].getCircle().getPosition();
 		sf::Vector2f diff = sf::Vector2f(mPos.x - ballPos.x, mPos.y - ballPos.y);
 
-		balls[0].setVelocity(diff);
+		balls[0].setVelocity(diff * 2.f);
 		shots++;
 	}
 }
